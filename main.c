@@ -1,18 +1,14 @@
-#include <iostream>
-#include <cmath>
-#include <string>
-
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
 #include <stdbool.h>
+#include <unistd.h> // cross-platform
+#include <math.h> // please use "gcc  main.c -o main -lm" to compile in Linux
 
 #define CHAR word[pos]
 
 #define SPECIAL_CHAR ch == 'A' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 's' || ch == 'G'
 #define SPECIAL_NUM ch == '4' || ch == '3' || ch == '1' || ch == '0' || ch == '5' || ch == '6'
-
-using namespace std;
 
 int special_chars_quantity(char*);
 void switch_char(int,char*);
@@ -24,8 +20,11 @@ int generate_alphanum_wordlst(char*,char*);
 
 int main(int argc, char *argv[])
 {
-    // test if files exist using bash
-    generate_alphanum_wordlst(argv[1],argv[2]);
+    // main.c input.txt output.txt # 3 arguments
+    // read file exists
+    if (argc == 3 && access(argv[1], F_OK ) != -1) {
+        generate_alphanum_wordlst(argv[1],argv[2]);
+    }
 
 	return 0;
 }
